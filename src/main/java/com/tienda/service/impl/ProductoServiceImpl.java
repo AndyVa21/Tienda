@@ -43,4 +43,33 @@ public class ProductoServiceImpl implements ProductoService {
     public void delete(Producto producto) {
         productoDao.delete(producto);
     }
+
+    @Override
+    @Transactional(readOnly=true)
+    public List<Producto> findByPrecioBetweenOrderByDescripcion(double precioInf, double precioSup) {
+        return productoDao.findByPrecioBetweenOrderByDescripcion(precioInf, precioSup);
+    }
+    
+    @Override
+    @Transactional(readOnly=true)    
+    public List<Producto> metodoJPQL(double precioInf, double precioSup) {
+        return productoDao.metodoJPQL(precioInf, precioSup);
+    }
+    
+    @Override
+    @Transactional(readOnly=true)    
+    public List<Producto> metodoNativo(double precioInf, double precioSup) {
+        return productoDao.metodoNativo(precioInf, precioSup);
+    }
+    
+    @Override
+    public List<Producto> obtenerProductosPorExistenciasRango(int min, int max) {
+        if (min < 0 || max < 0) {
+            throw new IllegalArgumentException("El rango de existencias no puede ser negativo.");
+        }
+        if (min > max) {
+            throw new IllegalArgumentException("El límite inferior no puede ser mayor que el superior.");
+        }
+        return productoDao.findByExistenciasBetween(min, max);
+    }
 }

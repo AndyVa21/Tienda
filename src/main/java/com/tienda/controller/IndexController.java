@@ -14,10 +14,9 @@ public class IndexController {
         return "index";
     }
     
-    @RequestMapping("/contacto")
-    public String paginaContacto(Model model) {
-        //model.addAttribute("attribute", "value");
-        return "info";
-    }
+//    @RequestMapping("/contacto")
+//    public String paginaContacto(Model model) {
+//       return "info";
+//    }
     
 }
